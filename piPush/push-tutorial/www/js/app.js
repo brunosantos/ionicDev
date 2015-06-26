@@ -12,7 +12,8 @@
   'ionic.service.push',
   'starter.controllers',
   'starter.services',
-  'ionic.service.deploy'
+  'ionic.service.deploy',
+  'ionic.service.analytics'
 ])
 //  .run(['$ionicDeploy', function($ionicDeploy) {
 //     // Check for updates
@@ -58,8 +59,9 @@
   });
 }])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicAnalytics) {
   $ionicPlatform.ready(function() {
+    $ionicAnalytics.register();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
