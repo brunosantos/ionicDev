@@ -6,6 +6,12 @@
 <button class="button button-block button-positive" ng-if="identified" ng-click="pushRegister()">
   Register for Push
 </button>
+<button class="button button-primary button-block " ng-click="checkForUpdates()">
+  Check for updates
+</button>
+<button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
+  download update
+</button>
     <div class="list card">
       <div class="item item-divider">Recent Updates</div>
       <div class="item item-body">
