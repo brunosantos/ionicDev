@@ -1,5 +1,16 @@
 <ion-view view-title="Chats">
   <ion-content>
+
+  <ion-header-bar class="top">
+  <h1 class="title">Items</h1>
+  <button class="button button-icon ion-plus" ng-click="addItem()"></button>
+</ion-header-bar>
+  <ion-list>
+    <ion-item ng-repeat="item in items">
+      {{item.name}}
+    </ion-item>
+  </ion-list>
+
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
         <img ng-src="{{chat.face}}">

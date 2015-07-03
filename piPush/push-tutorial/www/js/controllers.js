@@ -13,24 +13,43 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('DashCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy, Items, piItems, $firebaseObject) {
+.controller('DashCtrl', function($scope, $cordovaToast, piItems, $firebaseObject) {
 
-  $scope.items = Items;
+
   $scope.piItems = piItems;
 
   $scope.getPiDHT = function(){
     //$scope.items.$add();
-    $cordovaToast.showShortCenter('Ionic Deploy: Progress... ');
+    $cordovaToast.showShortCenter('temp', $scope.piItems[0].temperature);
   }
 
   var obj = $firebaseObject(new Firebase("https://intense-torch-2736.firebaseio.com/pi"));
   var unwatch = obj.$watch(function() {
-    //$cordovaToast.showShortCenter("data changed!");
+    $cordovaToast.showShortCenter("data changed!");
     console.log("data changed!", $scope.piItems.$keyAt(1));
     $scope.temp = $scope.piItems;//$scope.piItems.pop().temperature;
   });
 
-  $scope.addItem = function() {
+
+})
+  
+.controller('ChatsCtrl', function($scope, Chats, Items) {
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  
+  $scope.chats = Chats.all();
+  $scope.remove = function(chat) {
+    Chats.remove(chat);
+  }
+
+  $scope.items = Items;
+
+    $scope.addItem = function() {
     var date = new Date();
     var name = prompt("What do you need to buy?");
     if (name) {
@@ -43,8 +62,18 @@ angular.module('starter.controllers', [])
       });
     }
   };
+})
 
-  // Update app code with new release from Ionic Deploy
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+  $scope.chat = Chats.get($stateParams.chatId);
+})
+
+.controller('AccountCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy, piItems, $firebaseObject) {
+  $scope.settings = {
+    enableFriends: true
+  };
+
+    // Update app code with new release from Ionic Deploy
   $scope.doUpdate = function() {
     $ionicDeploy.update().then(function(res) {
       $cordovaToast.showShortCenter('Ionic Deploy: Update Success! ', res);
@@ -116,31 +145,6 @@ angular.module('starter.controllers', [])
       $cordovaToast.showShortCenter('Got token', data.token, data.platform);
       // alert('Got token', data.token, data.platform);
     });
-  };
-})
-  
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-  
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
   };
 });
 

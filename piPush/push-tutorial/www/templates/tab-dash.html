@@ -1,28 +1,6 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-  <button class="button button-block button-dark" ng-click="identifyUser()">
-  Identify a user
-</button>
-<button class="button button-block button-positive" ng-if="identified" ng-click="pushRegister()">
-  Register for Push
-</button>
-<button class="button button-primary button-block " ng-click="checkForUpdates()">
-  Check for updates
-</button>
-<button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
-  download update
-</button>
-<ion-header-bar class="top">
-  <h1 class="title">Items</h1>
-  <button class="button button-icon ion-plus" ng-click="addItem()"></button>
-</ion-header-bar>
-<ion-content>
-  <ion-list>
-    <ion-item ng-repeat="item in items">
-      {{item.name}}
-    </ion-item>
-  </ion-list>
-</ion-content>
+
 <button class="button button-stable button-block button-pulse" ng-click="getPiDHT()">
   getPiDHT
 </button>
@@ -32,22 +10,6 @@
       <div class="item item-body">
         <div>
           There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
         </div>
       </div>
     </div>
