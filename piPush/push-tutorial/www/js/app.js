@@ -13,7 +13,8 @@
   'starter.controllers',
   'starter.services',
   'ionic.service.deploy',
-  'ionic.service.analytics'
+  'ionic.service.analytics',
+  'firebase'
 ])
 //  .run(['$ionicDeploy', function($ionicDeploy) {
 //     // Check for updates

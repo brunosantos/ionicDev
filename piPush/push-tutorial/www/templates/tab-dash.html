@@ -12,6 +12,18 @@
 <button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
   download update
 </button>
+<ion-header-bar class="top">
+  <h1 class="title">Items</h1>
+  <button class="button button-icon ion-plus" ng-click="addItem()"></button>
+</ion-header-bar>
+<ion-content>
+  <ion-list>
+    <ion-item ng-repeat="item in items">
+      {{item.name}}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
     <div class="list card">
       <div class="item item-divider">Recent Updates</div>
       <div class="item item-body">

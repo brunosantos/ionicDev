@@ -1,6 +1,26 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy) {
+.factory("Items", function($firebaseArray) {
+  var itemsRef = new Firebase("https://intense-torch-2736.firebaseio.com/items");
+  return $firebaseArray(itemsRef);
+})
+
+.controller('DashCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy, Items) {
+
+  $scope.items = Items;
+  $scope.addItem = function() {
+    var date = new Date();
+    var name = prompt("What do you need to buy?");
+    if (name) {
+      $scope.items.$add({
+        "name": name,
+        "date":date.toJSON(),
+        "time":date.getHours(),
+        "humidity":12,
+        "temperature":33
+      });
+    }
+  };
 
   // Update app code with new release from Ionic Deploy
   $scope.doUpdate = function() {
