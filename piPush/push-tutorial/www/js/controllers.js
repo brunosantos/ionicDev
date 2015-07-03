@@ -5,9 +5,31 @@ angular.module('starter.controllers', [])
   return $firebaseArray(itemsRef);
 })
 
-.controller('DashCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy, Items) {
+.factory("piItems", function($firebaseArray) {
+  var itemsRef = new Firebase("https://intense-torch-2736.firebaseio.com/pi");
+  return $firebaseArray(itemsRef);
+})
+
+
+
+
+.controller('DashCtrl', function($scope, $rootScope, $ionicUser, $ionicPush, $cordovaToast,  $ionicDeploy, Items, piItems, $firebaseObject) {
 
   $scope.items = Items;
+  $scope.piItems = piItems;
+
+  $scope.getPiDHT = function(){
+    //$scope.items.$add();
+    $cordovaToast.showShortCenter('Ionic Deploy: Progress... ');
+  }
+
+  var obj = $firebaseObject(new Firebase("https://intense-torch-2736.firebaseio.com/pi"));
+  var unwatch = obj.$watch(function() {
+    //$cordovaToast.showShortCenter("data changed!");
+    console.log("data changed!", $scope.piItems.$keyAt(1));
+    $scope.temp = $scope.piItems;//$scope.piItems.pop().temperature;
+  });
+
   $scope.addItem = function() {
     var date = new Date();
     var name = prompt("What do you need to buy?");
